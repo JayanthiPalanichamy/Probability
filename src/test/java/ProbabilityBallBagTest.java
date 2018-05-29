@@ -17,4 +17,11 @@ public class ProbabilityBallBagTest {
 
         assertEquals(probabilityOfOneBlueAndOneRed,new Probability(0.2));
     }
+
+    @Test
+    public void returnProbabilityOfGettingTwoBlueBall() {
+        Probability probabilityOfOneBlueAndOneRed = ballBag.calculateProbabilityOfGetting(2,0,0);
+
+        assertEquals(probabilityOfOneBlueAndOneRed,new Probability(0.1));
+    }
 }
