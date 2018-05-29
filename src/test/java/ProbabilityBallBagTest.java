@@ -13,15 +13,22 @@ public class ProbabilityBallBagTest {
 
     @Test
     public void returnProbabilityOfGettingOneBlueBallAndOneRedBall() {
-        Probability probabilityOfOneBlueAndOneRed = ballBag.calculateProbabilityOfGetting(1,0,1);
+        Probability probabilityOfOneBlueAndOneRed = ballBag.calculateProbabilityOfGettingExactly(1,0,1);
 
         assertEquals(probabilityOfOneBlueAndOneRed,new Probability(0.2));
     }
 
     @Test
     public void returnProbabilityOfGettingTwoBlueBall() {
-        Probability probabilityOfOneBlueAndOneRed = ballBag.calculateProbabilityOfGetting(2,0,0);
+        Probability probabilityOfOneBlueAndOneRed = ballBag.calculateProbabilityOfGettingExactly(2,0,0);
 
         assertEquals(probabilityOfOneBlueAndOneRed,new Probability(0.1));
+    }
+
+    @Test
+    public void returnProbabilityOfGettingThreeDistinctBalls() {
+        Probability probabilityOfOneBlueAndOneRed = ballBag.calculateProbabilityOfGettingExactly(1,1,1);
+
+        assertEquals(probabilityOfOneBlueAndOneRed,new Probability(0.4));
     }
 }

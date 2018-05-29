@@ -11,7 +11,7 @@ public class BallBag {
         this.sample = blueBalls + yellowBalls + redBalls;
     }
 
-    public Probability calculateProbabilityOfGetting(int blueDrawn, int yellowDrawn, int redDrawn) {
+    public Probability calculateProbabilityOfGettingExactly(int blueDrawn, int yellowDrawn, int redDrawn) {
         int totalBallsDrawn = blueDrawn + yellowDrawn + redDrawn;
         return new Probability((nCr(blueBalls, blueDrawn) * nCr(yellowBalls, yellowDrawn) * nCr(redBalls, redDrawn)) / nCr(sample, totalBallsDrawn));
     }
