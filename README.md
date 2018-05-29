@@ -1,1 +1,1 @@
-As A math student I want to represent the probability
+As A math student I want to represent the probability of getting a tail and not getting a tail.

@@ -12,4 +12,16 @@ public class Probability {
         Probability that = (Probability) o;
         return Double.compare(that.probabilityValue, probabilityValue) == 0;
     }
+
+    public Probability not() {
+        return new Probability(1 - probabilityValue);
+    }
+
+    public Probability and(Probability other) {
+        return new Probability(probabilityValue * other.probabilityValue);
+    }
+
+    public Probability or(Probability other) {
+        return not().and(other.not()).not();
+    }
 }

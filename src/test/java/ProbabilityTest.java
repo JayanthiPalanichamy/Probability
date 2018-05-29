@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProbabilityTest {
@@ -45,8 +46,29 @@ public class ProbabilityTest {
 
     @Test
     public void shouldRepresentTheChanceOfNotGettingATail() {
-        Probability probability = new Probability(PROBABILITY_OF_NOT_GETTING_TAIL);
+        Probability probabilityOfTails = new Probability(PROBABILITY_OF_TAIL);
+        Probability probabilityOfNotGettingTails = probabilityOfTails.not();
 
-        assertEquals(probability, new Probability(0.5));
+        assertEquals(probabilityOfNotGettingTails, new Probability(PROBABILITY_OF_NOT_GETTING_TAIL));
+    }
+
+    @Test
+    public void shouldRepresentTwoTailsFromTwoCoins() {
+        Probability probabilityOfTailsFirstCoin = new Probability(PROBABILITY_OF_TAIL);
+        Probability probabilityOfTailsSecondCoin = new Probability(PROBABILITY_OF_TAIL);
+        Probability probabilityOfTailsInTwoCoin = probabilityOfTailsFirstCoin.and(probabilityOfTailsSecondCoin);
+
+        assertNotEquals(probabilityOfTailsInTwoCoin, new Probability(0.5));
+    }
+
+    @Test
+    public void shouldRepresentAtLeastOneTailFromTwoCoin() {
+        Probability probabilityOfTailsFirstCoin = new Probability(PROBABILITY_OF_TAIL);
+        Probability probabilityOfTailsSecondCoin = new Probability(PROBABILITY_OF_TAIL);
+        Probability probabilityOfAtLeastOneTail = probabilityOfTailsFirstCoin.or(probabilityOfTailsSecondCoin);
+
+        assertEquals(probabilityOfAtLeastOneTail, new Probability(0.75));
+        assertNotEquals(probabilityOfAtLeastOneTail, new Probability(0.25));
+        assertEquals(new Probability(1),new Probability(1).or( new Probability(1)));
     }
 }
