@@ -24,4 +24,11 @@ public class Probability {
     public Probability or(Probability other) {
         return not().and(other.not()).not();
     }
+
+    @Override
+    public String toString() {
+        return "Probability{" +
+                "probabilityValue=" + probabilityValue +
+                '}';
+    }
 }

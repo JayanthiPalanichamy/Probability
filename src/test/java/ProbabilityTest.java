@@ -47,6 +47,7 @@ public class ProbabilityTest {
     @Test
     public void shouldRepresentTheChanceOfNotGettingATail() {
         Probability probabilityOfTails = new Probability(PROBABILITY_OF_TAIL);
+
         Probability probabilityOfNotGettingTails = probabilityOfTails.not();
 
         assertEquals(probabilityOfNotGettingTails, new Probability(PROBABILITY_OF_NOT_GETTING_TAIL));
@@ -56,19 +57,21 @@ public class ProbabilityTest {
     public void shouldRepresentTwoTailsFromTwoCoins() {
         Probability probabilityOfTailsFirstCoin = new Probability(PROBABILITY_OF_TAIL);
         Probability probabilityOfTailsSecondCoin = new Probability(PROBABILITY_OF_TAIL);
+
         Probability probabilityOfTailsInTwoCoin = probabilityOfTailsFirstCoin.and(probabilityOfTailsSecondCoin);
 
-        assertNotEquals(probabilityOfTailsInTwoCoin, new Probability(0.5));
+        assertNotEquals(new Probability(0.5),probabilityOfTailsInTwoCoin);
     }
 
     @Test
     public void shouldRepresentAtLeastOneTailFromTwoCoin() {
         Probability probabilityOfTailsFirstCoin = new Probability(PROBABILITY_OF_TAIL);
         Probability probabilityOfTailsSecondCoin = new Probability(PROBABILITY_OF_TAIL);
+
         Probability probabilityOfAtLeastOneTail = probabilityOfTailsFirstCoin.or(probabilityOfTailsSecondCoin);
 
-        assertEquals(probabilityOfAtLeastOneTail, new Probability(0.75));
-        assertNotEquals(probabilityOfAtLeastOneTail, new Probability(0.25));
+        assertEquals(new Probability(0.75),probabilityOfAtLeastOneTail);
+        assertNotEquals(new Probability(0.25),probabilityOfAtLeastOneTail);
         assertEquals(new Probability(1),new Probability(1).or( new Probability(1)));
     }
 }

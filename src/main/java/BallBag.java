@@ -1,31 +1,34 @@
-public class BallBag {
-    private final int blueBalls;
-    private final int yellowBalls;
-    private final int redBalls;
-    private final int sample;
+import java.util.HashMap;
 
-    public BallBag(int blueBalls, int yellowBalls, int redBalls) {
-        this.blueBalls = blueBalls;
-        this.yellowBalls = yellowBalls;
-        this.redBalls = redBalls;
-        this.sample = blueBalls + yellowBalls + redBalls;
+public class BallBag {
+    private final int sample;
+    private HashMap<BallColor, Integer> ballList;
+    public BallBag(HashMap<BallColor, Integer> ballList) {
+        this.ballList = ballList;
+        sample = ballList.values().stream().reduce(0 ,(a,b)->a+b);
     }
 
-    public Probability calculateProbabilityOfGettingExactly(int blueDrawn, int yellowDrawn, int redDrawn) {
-        int totalBallsDrawn = blueDrawn + yellowDrawn + redDrawn;
-        return new Probability((nCr(blueBalls, blueDrawn) * nCr(yellowBalls, yellowDrawn) * nCr(redBalls, redDrawn)) / nCr(sample, totalBallsDrawn));
+    public Probability calculateProbabilityOfGettingExactly(HashMap<BallColor, Integer> drawnBallList) {
+        int totalBallsDrawn = drawnBallList.values().stream().reduce(0 ,(a,b)->a+b);
+        double value = 1;
+        for (BallColor ballColor:drawnBallList.keySet()) {
+            value *=  nCr(ballList.get(ballColor),drawnBallList.get(ballColor));
+
+        }
+        value = value/ nCr(sample, totalBallsDrawn);
+        return new Probability( value);
     }
 
     private double nCr(int n, int r) {
-        return fact(n) / (fact(r) * fact(n - r));
+        return factorial(n) / (factorial(r) * factorial(n - r));
     }
 
-    private double fact(int num) {
-        if (num == 0 || num == 1) return 1.0;
+    private double factorial(int number) {
+        if (number == 0 || number == 1) return 1.0;
         double factorialValue = 1.0;
-        while (num != 0) {
-            factorialValue *= num;
-            num--;
+        while (number != 0) {
+            factorialValue *= number;
+            number--;
         }
         return factorialValue;
     }
